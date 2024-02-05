@@ -7,6 +7,7 @@
 plugins {
     // Apply the java Plugin to add support for Java.
     java
+    id("com.diffplug.spotless")
 }
 
 repositories {
@@ -35,5 +36,12 @@ testing {
 java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(11)
+    }
+}
+
+spotless {
+    java {
+        removeUnusedImports()
+        palantirJavaFormat("2.40.0")
     }
 }
