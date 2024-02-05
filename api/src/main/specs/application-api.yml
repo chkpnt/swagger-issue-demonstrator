@@ -1,0 +1,92 @@
+openapi: 3.0.1
+info:
+  title: application-api
+  version: "1.0"
+tags:
+  - name: Application
+    description: Interface for applications
+paths:
+  /application:
+    post:
+      summary: Submit an application
+      description: Submission of a new application.
+      operationId: createApplication
+      requestBody:
+        description: the application
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Application'
+        required: true
+      responses:
+        "200":
+          description: Application submitted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Application'
+        "400":
+          description: Invalid application
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RequestErrorInfo'
+components:
+  schemas:
+    Application:
+      required:
+        - application_type
+      type: object
+      properties:
+        application_type:
+          $ref: '#/components/schemas/ApplicationType'
+        application_id:
+          type: string
+          readOnly: true
+        application_description:
+          type: string
+      description: Abstract model of an application
+      discriminator:
+        propertyName: application_type
+        mapping:
+          PassierscheinA38: '#/components/schemas/PassierscheinA38'
+          CreditApplication: '#/components/schemas/CreditApplication'
+    ApplicationType:
+      type: string
+      enum:
+        - PassierscheinA38
+        - CreditApplication
+    CreditApplication:
+      required:
+        - application_type
+      type: object
+      description: "Application for Passierschein A38"
+      allOf:
+        - $ref: '#/components/schemas/Application'
+        - type: object
+          properties:
+            amount:
+              type: number
+    PassierscheinA38:
+      required:
+        - application_type
+      type: object
+      description: "Application for Passierschein A38"
+      allOf:
+        - $ref: '#/components/schemas/Application'
+        - type: object
+          properties:
+            applicant:
+              type: string
+    RequestErrorInfo:
+      type: object
+      properties:
+        status:
+          type: string
+        code:
+          type: string
+          description: The HTTP response code.
+        messages:
+          type: array
+          items:
+            type: string

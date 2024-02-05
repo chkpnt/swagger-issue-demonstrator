@@ -17,4 +17,4 @@ plugins {
 }
 
 rootProject.name = "swagger-issue-demonstrator"
-include("app", "list", "utilities")
+include("app", "list", "utilities", "api")
