@@ -14,7 +14,6 @@ package org.example.applicationapi.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeId;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.util.Objects;
@@ -26,14 +25,14 @@ import java.util.Objects;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "application_type",
+        property = "applicationType",
         visible = true)
 @JsonSubTypes({
     @JsonSubTypes.Type(value = PassierscheinA38.class, name = "PassierscheinA38"),
     @JsonSubTypes.Type(value = CreditApplication.class, name = "CreditApplication"),
 })
 public class Application {
-    @JsonTypeId
+    @JsonProperty("application_type")
     private ApplicationType applicationType = null;
 
     @JsonProperty("application_id")

@@ -8,7 +8,7 @@ plugins {
 
 dependencies {
     "swaggerUI"("org.webjars:swagger-ui:5.10.3")
-    "swaggerCodegen"("io.swagger.codegen.v3:swagger-codegen-cli:3.0.46")
+    "swaggerCodegen"("io.swagger.codegen.v3:swagger-codegen-cli:3.0.47")
     "swaggerTemplate"("io.swagger.codegen.v3:swagger-codegen-generators:1.0.46")
 
     val jerseyVersion = "2.35"
