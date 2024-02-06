@@ -1,0 +1,3 @@
+This is a demonstrator project for https://github.com/swagger-api/swagger-codegen/issues/12335
+
+It's about [this change](https://github.com/chkpnt/swagger-issue-demonstrator/compare/3.0.46...3.0.47) in [Application.java](api/src/generated/java/org/example/applicationapi/model/Application.java) introduced by `swagger-codegen-cli` 3.0.47, which leads to an additional discriminator property in the serialized model for [application-api.yml](api/src/main/specs/application-api.yml), see [PassierscheinA38Test.java](api/src/test/java/org/example/applicationapi/model/PassierscheinA38Test.java).
